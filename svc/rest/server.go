@@ -42,6 +42,7 @@ func (s *Server) Run() error {
 		openAccessed.GET("/ping", func(c *gin.Context) {
 			c.JSON(200, gin.H{"ping": "pong"})
 		})
+		openAccessed.POST("/v1/generate-strings", s.GenerateListOfStrings)
 
 	}
 
