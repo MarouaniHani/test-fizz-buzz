@@ -51,3 +51,22 @@
 	"success": true
 }
 ```
+#### Get statistics
+
+* ( GET ): `/v1/statistics`.
+
+1. Request
+
+* Url:  `/v1/statistics`
+
+
+1. Responses
+
+* status: 200
+
+```
+{
+	"data": "the parameters corresponding to the most used request (FristString : hany, SecondString : marouani, FirstNumber : 2, SecondNumber : 5, Limit : 20) , with number of request : 4",
+	"success": true
+}
+```
