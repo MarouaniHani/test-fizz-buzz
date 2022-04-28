@@ -1,6 +1,8 @@
 package rest
 
 import (
+	"container/heap"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
 	"strings"
@@ -37,4 +39,19 @@ func (s *Server) GenerateListOfStrings(c *gin.Context) {
 	} else {
 		m[res] = 1
 	}
+}
+
+func (s *Server) GetStatistics(c *gin.Context) {
+	if len(m) == 0 {
+		ResponseData(c, "no request have been applied")
+		return
+	}
+	h := getHeap(m)
+	req := heap.Pop(h).(kv)
+	str := strings.Split(req.Key, ";")
+	params := GetRequestParams(str)
+	result := fmt.Sprintf("the parameters corresponding to the most used request "+
+		"(FristString : %s, SecondString : %s, FirstNumber : %d, SecondNumber : %d, Limit : %d) , with number of request : %d",
+		params.FirstString, params.SecondString, params.FirstNumber, params.SecondNumber, params.Limit, req.Value)
+	ResponseData(c, result)
 }
